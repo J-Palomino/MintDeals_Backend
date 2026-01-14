@@ -1,6 +1,12 @@
 'use strict';
 
-module.exports = {
+/**
+ * product-discount controller
+ */
+
+const { createCoreController } = require('@strapi/strapi').factories;
+
+module.exports = createCoreController('api::product-discount.product-discount', ({ strapi }) => ({
   async getProductDiscounts(ctx) {
     try {
       const { dutchie_store_id } = ctx.query;
@@ -20,7 +26,7 @@ module.exports = {
       const result = await knex.raw(query, bindings);
       const rows = result.rows || [];
 
-      console.log(`✅ Found ${rows.length} product discounts`);
+      console.log(`Found ${rows.length} product discounts`);
 
       return {
         data: rows,
@@ -28,7 +34,7 @@ module.exports = {
       };
 
     } catch (error) {
-      console.error('ERROR:', error.message);
+      console.error('Product Discount Error:', error.message);
 
       return ctx.badRequest('Failed to fetch product discounts', {
         message: error.message,
@@ -36,4 +42,4 @@ module.exports = {
       });
     }
   },
-};
+}));

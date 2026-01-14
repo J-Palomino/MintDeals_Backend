@@ -39,6 +39,8 @@ async function setPublicPermissions(strapi) {
     { api: 'inventory', actions: ['find', 'findOne'] },
     // Discount API
     { api: 'discount', actions: ['find', 'findOne'] },
+    // Product Discount API
+    { api: 'product-discount', actions: ['find', 'findOne', 'getProductDiscounts'] },
   ];
 
   // Get the public role
