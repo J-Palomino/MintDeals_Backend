@@ -62,7 +62,12 @@ module.exports = createCoreController('api::product-discount.product-discount', 
         },
       };
     } catch (error) {
-      strapi.log.error(`Product discount fetch error: ${error.message}`);
+      strapi.log.error(`Product discount fetch error: ${error.message}`, {
+        dutchie_store_id: ctx.query.dutchie_store_id,
+        page: ctx.query.page,
+        pageSize: ctx.query.pageSize,
+      });
+      strapi.log.error(error.stack);
       ctx.throw(500, 'Failed to fetch product discounts');
     }
   },

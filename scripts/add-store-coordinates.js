@@ -87,4 +87,7 @@ async function main() {
   console.log('\nDone!');
 }
 
-main();
+main().catch((error) => {
+  console.error('Script failed:', error.message);
+  process.exit(1);
+});

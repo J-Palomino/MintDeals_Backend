@@ -1,4 +1,6 @@
 module.exports = ({ env }) => {
+  const isProduction = env('NODE_ENV') === 'production';
+
   // Check if DATABASE_URL exists (Railway provides this)
   const databaseUrl = env('DATABASE_URL');
 
@@ -23,11 +25,21 @@ module.exports = ({ env }) => {
         },
       };
     } catch (error) {
-      console.error('Error parsing DATABASE_URL:', error.message);
+      // In production, fail fast if DATABASE_URL is invalid
+      if (isProduction) {
+        throw new Error(`Invalid DATABASE_URL format: ${error.message}`);
+      }
+      // In development, log warning and fall back to individual env vars
+      console.warn(`Warning: Could not parse DATABASE_URL (${error.message}), using individual env vars`);
     }
   }
 
-  // PostgreSQL configuration only
+  // Require DATABASE_URL in production
+  if (isProduction && !databaseUrl) {
+    throw new Error('DATABASE_URL is required in production');
+  }
+
+  // PostgreSQL configuration using individual env vars (development fallback)
   return {
     connection: {
       client: 'postgres',

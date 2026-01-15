@@ -3,29 +3,34 @@
 module.exports = {
   register({ strapi }) {
     // Check environment variables on startup
-    console.log('=== Strapi Register Called ===');
+    strapi.log.debug('Strapi register phase started');
     const envCheck = require('../config/env-check');
-    const isValid = envCheck();
+    const isValid = envCheck(strapi.log);
 
     if (!isValid && process.env.NODE_ENV === 'production') {
       strapi.log.warn('Missing required environment variables in production!');
     }
-    console.log('=== Strapi Register Completed ===');
+    strapi.log.debug('Strapi register phase completed');
   },
 
   async bootstrap({ strapi }) {
-    // Log successful Cloudinary configuration
-    const uploadConfig = strapi.config.get('plugin.upload');
+    try {
+      // Log successful Cloudinary configuration
+      const uploadConfig = strapi.config.get('plugin.upload');
 
-    if (uploadConfig?.provider === 'cloudinary') {
-      strapi.log.info('Cloudinary provider configured');
-      strapi.log.info(`Cloud name: ${uploadConfig.providerOptions?.cloud_name || 'NOT SET'}`);
-    } else {
-      strapi.log.warn(`Upload provider: ${uploadConfig?.provider || 'NOT SET'}`);
+      if (uploadConfig?.provider === 'cloudinary') {
+        strapi.log.info('Cloudinary provider configured');
+        strapi.log.info(`Cloud name: ${uploadConfig.providerOptions?.cloud_name || 'NOT SET'}`);
+      } else {
+        strapi.log.warn(`Upload provider: ${uploadConfig?.provider || 'NOT SET'}`);
+      }
+
+      // Set up public permissions for API endpoints
+      await setPublicPermissions(strapi);
+    } catch (error) {
+      strapi.log.error(`Bootstrap failed: ${error.message}`);
+      strapi.log.error(error.stack);
     }
-
-    // Set up public permissions for API endpoints
-    await setPublicPermissions(strapi);
   },
 };
 
@@ -81,10 +86,12 @@ async function setPublicPermissions(strapi) {
           }
         } catch (permError) {
           strapi.log.error(`Failed to set permission ${permissionAction}: ${permError.message}`);
+          strapi.log.error(permError.stack);
         }
       }
     }
   } catch (error) {
     strapi.log.error(`Failed to set public permissions: ${error.message}`);
+    strapi.log.error(error.stack);
   }
 }

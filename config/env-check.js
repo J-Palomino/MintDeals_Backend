@@ -1,4 +1,17 @@
-module.exports = () => {
+/**
+ * Environment variable validation
+ * @param {Object} logger - Optional logger (strapi.log) for structured logging
+ * @returns {boolean} - true if all required env vars are set
+ */
+module.exports = (logger) => {
+  // Use provided logger or fallback to console for standalone script usage
+  const log = {
+    info: logger?.info || console.log,
+    warn: logger?.warn || console.warn,
+    error: logger?.error || console.error,
+    debug: logger?.debug || console.log,
+  };
+
   const required = {
     // Cloudinary
     CLOUDINARY_NAME: process.env.CLOUDINARY_NAME,
@@ -11,7 +24,7 @@ module.exports = () => {
     JWT_SECRET: process.env.JWT_SECRET,
   };
 
-  // In development, check DATABASE_URL OR individual database vars
+  // In production, DATABASE_URL is required
   if (process.env.NODE_ENV !== 'development') {
     required.DATABASE_URL = process.env.DATABASE_URL;
   }
@@ -23,15 +36,19 @@ module.exports = () => {
     }
   }
 
-  // Only log in development or if there are missing vars
+  // Only log details in development or if there are missing vars
   if (process.env.NODE_ENV === 'development') {
-    console.log('=== Environment Variables Check ===');
+    log.debug('=== Environment Variables Check ===');
     for (const [key, value] of Object.entries(required)) {
-      console.log(`${value ? '✅' : '❌'} ${key}: ${value ? 'Set' : 'MISSING'}`);
+      log.debug(`${value ? '✅' : '❌'} ${key}: ${value ? 'Set' : 'MISSING'}`);
     }
-    console.log(missing.length === 0 ? '\n✅ All env vars set' : '\n⚠️  Missing:', missing.join(', '));
+    if (missing.length === 0) {
+      log.debug('All required environment variables are set');
+    } else {
+      log.warn(`Missing environment variables: ${missing.join(', ')}`);
+    }
   } else if (missing.length > 0) {
-    console.error('⚠️  Missing env vars:', missing.join(', '));
+    log.error(`Missing required environment variables: ${missing.join(', ')}`);
   }
 
   return missing.length === 0;
