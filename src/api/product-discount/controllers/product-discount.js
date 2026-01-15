@@ -11,35 +11,31 @@ module.exports = createCoreController('api::product-discount.product-discount', 
     try {
       const { dutchie_store_id } = ctx.query;
 
-      const knex = strapi.db.connection;
-
-      let query = 'SELECT * FROM public.product_discounts';
-      const bindings = [];
-
+      // Build filters based on query params
+      const filters = {};
       if (dutchie_store_id) {
-        query += ' WHERE dutchie_store_id = $1';
-        bindings.push(dutchie_store_id);
+        filters.dutchie_store_id = dutchie_store_id;
       }
 
-      query += ' LIMIT 1000';
+      // Use Strapi's entity service for reliable querying
+      const results = await strapi.entityService.findMany(
+        'api::product-discount.product-discount',
+        {
+          filters,
+          limit: 1000,
+        }
+      );
 
-      const result = await knex.raw(query, bindings);
-      const rows = result.rows || [];
-
-      console.log(`Found ${rows.length} product discounts`);
+      console.log(`Found ${results.length} product discounts`);
 
       return {
-        data: rows,
-        meta: { total: rows.length }
+        data: results,
+        meta: { total: results.length }
       };
 
     } catch (error) {
       console.error('Product Discount Error:', error.message);
-
-      return ctx.badRequest('Failed to fetch product discounts', {
-        message: error.message,
-        details: error.toString()
-      });
+      ctx.throw(500, 'Failed to fetch product discounts');
     }
   },
 }));
