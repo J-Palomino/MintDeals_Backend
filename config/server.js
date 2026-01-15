@@ -1,26 +1,26 @@
 module.exports = ({ env }) => {
-  // Generate default keys for development/fallback
-  const defaultKeys = [
-    'toBeModified1',
-    'toBeModified2',
-  ];
+  const isProduction = env('NODE_ENV') === 'production';
 
-  // Ensure we have APP_KEYS or use defaults
-  const appKeys = env.array('APP_KEYS') || defaultKeys;
+  // Development fallback keys (never used in production)
+  const devKeys = ['dev-key-1-change-in-production', 'dev-key-2-change-in-production'];
 
-  if (env('NODE_ENV') === 'production' && (!appKeys || appKeys.length === 0 || appKeys[0] === 'toBeModified1')) {
-    console.error('⚠️  APP_KEYS not configured for production!');
+  const appKeys = env.array('APP_KEYS');
+
+  // In production, require APP_KEYS to be properly configured
+  if (isProduction) {
+    if (!appKeys || appKeys.length === 0) {
+      throw new Error('APP_KEYS environment variable is required in production');
+    }
   }
 
   return {
     host: env('HOST', '0.0.0.0'),
     port: env.int('PORT', 1337),
     app: {
-      keys: appKeys,
+      keys: appKeys || devKeys,
     },
-    // Disable unnecessary logging for production
     logger: {
-      level: env('NODE_ENV') === 'production' ? 'error' : 'debug',
+      level: isProduction ? 'error' : 'debug',
     },
     webhooks: {
       populateRelations: env.bool('WEBHOOKS_POPULATE_RELATIONS', false),

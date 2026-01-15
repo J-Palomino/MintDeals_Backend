@@ -43,40 +43,48 @@ async function setPublicPermissions(strapi) {
     { api: 'product-discount', actions: ['find', 'findOne', 'getProductDiscounts'] },
   ];
 
-  // Get the public role
-  const publicRole = await strapi
-    .query('plugin::users-permissions.role')
-    .findOne({ where: { type: 'public' } });
+  try {
+    // Get the public role
+    const publicRole = await strapi
+      .query('plugin::users-permissions.role')
+      .findOne({ where: { type: 'public' } });
 
-  if (!publicRole) {
-    strapi.log.warn('Public role not found, skipping permissions setup');
-    return;
-  }
+    if (!publicRole) {
+      strapi.log.warn('Public role not found, skipping permissions setup');
+      return;
+    }
 
-  for (const { api, actions } of publicPermissions) {
-    for (const action of actions) {
-      const permissionAction = `api::${api}.${api}.${action}`;
+    for (const { api, actions } of publicPermissions) {
+      for (const action of actions) {
+        const permissionAction = `api::${api}.${api}.${action}`;
 
-      // Check if permission already exists
-      const existingPermission = await strapi
-        .query('plugin::users-permissions.permission')
-        .findOne({
-          where: {
-            action: permissionAction,
-            role: publicRole.id,
-          },
-        });
+        try {
+          // Check if permission already exists
+          const existingPermission = await strapi
+            .query('plugin::users-permissions.permission')
+            .findOne({
+              where: {
+                action: permissionAction,
+                role: publicRole.id,
+              },
+            });
 
-      if (!existingPermission) {
-        // Create the permission
-        await strapi.query('plugin::users-permissions.permission').create({
-          data: {
-            action: permissionAction,
-            role: publicRole.id,
-          },
-        });
-        strapi.log.info(`Created public permission: ${permissionAction}`);
+          if (!existingPermission) {
+            // Create the permission
+            await strapi.query('plugin::users-permissions.permission').create({
+              data: {
+                action: permissionAction,
+                role: publicRole.id,
+              },
+            });
+            strapi.log.info(`Created public permission: ${permissionAction}`);
+          }
+        } catch (permError) {
+          strapi.log.error(`Failed to set permission ${permissionAction}: ${permError.message}`);
+        }
       }
     }
+  } catch (error) {
+    strapi.log.error(`Failed to set public permissions: ${error.message}`);
   }
 }
