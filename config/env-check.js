@@ -37,15 +37,16 @@ module.exports = (logger) => {
   }
 
   // Only log details in development or if there are missing vars
+  // Use console directly to avoid winston initialization issues during register phase
   if (process.env.NODE_ENV === 'development') {
-    log.debug('=== Environment Variables Check ===');
+    console.log('=== Environment Variables Check ===');
     for (const [key, value] of Object.entries(required)) {
-      log.debug(`${value ? '✅' : '❌'} ${key}: ${value ? 'Set' : 'MISSING'}`);
+      console.log(`${value ? '✅' : '❌'} ${key}: ${value ? 'Set' : 'MISSING'}`);
     }
     if (missing.length === 0) {
-      log.debug('All required environment variables are set');
+      console.log('All required environment variables are set');
     } else {
-      log.warn(`Missing environment variables: ${missing.join(', ')}`);
+      console.warn(`Missing environment variables: ${missing.join(', ')}`);
     }
   } else if (missing.length > 0) {
     log.error(`Missing required environment variables: ${missing.join(', ')}`);

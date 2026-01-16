@@ -18,6 +18,21 @@
     "product_id": {
       "type": "string"
     },
+    "product_name": {
+      "type": "string"
+    },
+    "brand_name": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "image_url": {
+      "type": "string"
+    },
+    "unit_price": {
+      "type": "decimal"
+    },
     "discount_id": {
       "type": "string"
     },
