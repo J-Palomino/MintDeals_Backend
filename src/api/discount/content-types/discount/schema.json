@@ -85,64 +85,40 @@
       "default": false
     },
     "appliesToLocations": {
-      "type": "component",
-      "repeatable": true,
-      "component": "discount.applies-to-location"
+      "type": "json"
     },
     "weeklyRecurrenceInfo": {
-      "type": "component",
-      "repeatable": false,
-      "component": "discount.weekly-recurrence"
+      "type": "json"
     },
     "products": {
-      "type": "component",
-      "repeatable": false,
-      "component": "discount.id-filter"
+      "type": "json"
     },
     "productCategories": {
-      "type": "component",
-      "repeatable": false,
-      "component": "discount.id-filter"
+      "type": "json"
     },
     "brands": {
-      "type": "component",
-      "repeatable": false,
-      "component": "discount.id-filter"
+      "type": "json"
     },
     "vendors": {
-      "type": "component",
-      "repeatable": false,
-      "component": "discount.id-filter"
+      "type": "json"
     },
     "strains": {
-      "type": "component",
-      "repeatable": false,
-      "component": "discount.id-filter"
+      "type": "json"
     },
     "tiers": {
-      "type": "component",
-      "repeatable": false,
-      "component": "discount.id-filter"
+      "type": "json"
     },
     "tags": {
-      "type": "component",
-      "repeatable": false,
-      "component": "discount.id-filter"
+      "type": "json"
     },
     "inventoryTags": {
-      "type": "component",
-      "repeatable": false,
-      "component": "discount.id-filter"
+      "type": "json"
     },
     "customerTypes": {
-      "type": "component",
-      "repeatable": false,
-      "component": "discount.id-filter"
+      "type": "json"
     },
     "discountGroups": {
-      "type": "component",
-      "repeatable": true,
-      "component": "discount.discount-group"
+      "type": "json"
     }
   }
 }

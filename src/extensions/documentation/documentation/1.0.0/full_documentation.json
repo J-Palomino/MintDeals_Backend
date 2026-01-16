@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-01-12T23:58:03.631Z"
+    "x-generation-date": "2026-01-16T18:20:26.023Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -8695,6 +8695,512 @@
         "operationId": "delete/inventories/{id}"
       }
     },
+    "/product-discounts": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductDiscountListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Product-discount"
+        ],
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort by attributes ascending (asc) or descending (desc)",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pagination[withCount]",
+            "in": "query",
+            "description": "Return page/pageSize (default: true)",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "pagination[page]",
+            "in": "query",
+            "description": "Page number (default: 0)",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pagination[pageSize]",
+            "in": "query",
+            "description": "Page size (default: 25)",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pagination[start]",
+            "in": "query",
+            "description": "Offset value (default: 0)",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pagination[limit]",
+            "in": "query",
+            "description": "Number of entities to return (default: 25)",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Fields to return (ex: title,author)",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "populate",
+            "in": "query",
+            "description": "Relations to return",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "description": "Filters to apply",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "object",
+              "additionalProperties": true
+            },
+            "style": "deepObject"
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "description": "Locale to apply",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "get/product-discounts"
+      },
+      "post": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductDiscountResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Product-discount"
+        ],
+        "parameters": [],
+        "operationId": "post/product-discounts",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductDiscountRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product-discounts/{id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductDiscountResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Product-discount"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "operationId": "get/product-discounts/{id}"
+      },
+      "put": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductDiscountResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Product-discount"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "operationId": "put/product-discounts/{id}",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductDiscountRequest"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Product-discount"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "operationId": "delete/product-discounts/{id}"
+      }
+    },
     "/regions": {
       "get": {
         "responses": {
@@ -15067,48 +15573,18 @@
               "stackOnOtherDiscounts": {
                 "type": "boolean"
               },
-              "appliesToLocations": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/DiscountAppliesToLocationComponent"
-                }
-              },
-              "weeklyRecurrenceInfo": {
-                "$ref": "#/components/schemas/DiscountWeeklyRecurrenceComponent"
-              },
-              "products": {
-                "$ref": "#/components/schemas/DiscountIdFilterComponent"
-              },
-              "productCategories": {
-                "$ref": "#/components/schemas/DiscountIdFilterComponent"
-              },
-              "brands": {
-                "$ref": "#/components/schemas/DiscountIdFilterComponent"
-              },
-              "vendors": {
-                "$ref": "#/components/schemas/DiscountIdFilterComponent"
-              },
-              "strains": {
-                "$ref": "#/components/schemas/DiscountIdFilterComponent"
-              },
-              "tiers": {
-                "$ref": "#/components/schemas/DiscountIdFilterComponent"
-              },
-              "tags": {
-                "$ref": "#/components/schemas/DiscountIdFilterComponent"
-              },
-              "inventoryTags": {
-                "$ref": "#/components/schemas/DiscountIdFilterComponent"
-              },
-              "customerTypes": {
-                "$ref": "#/components/schemas/DiscountIdFilterComponent"
-              },
-              "discountGroups": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/DiscountDiscountGroupComponent"
-                }
-              },
+              "appliesToLocations": {},
+              "weeklyRecurrenceInfo": {},
+              "products": {},
+              "productCategories": {},
+              "brands": {},
+              "vendors": {},
+              "strains": {},
+              "tiers": {},
+              "tags": {},
+              "inventoryTags": {},
+              "customerTypes": {},
+              "discountGroups": {},
               "locale": {
                 "type": "string"
               },
@@ -15243,48 +15719,18 @@
           "stackOnOtherDiscounts": {
             "type": "boolean"
           },
-          "appliesToLocations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DiscountAppliesToLocationComponent"
-            }
-          },
-          "weeklyRecurrenceInfo": {
-            "$ref": "#/components/schemas/DiscountWeeklyRecurrenceComponent"
-          },
-          "products": {
-            "$ref": "#/components/schemas/DiscountIdFilterComponent"
-          },
-          "productCategories": {
-            "$ref": "#/components/schemas/DiscountIdFilterComponent"
-          },
-          "brands": {
-            "$ref": "#/components/schemas/DiscountIdFilterComponent"
-          },
-          "vendors": {
-            "$ref": "#/components/schemas/DiscountIdFilterComponent"
-          },
-          "strains": {
-            "$ref": "#/components/schemas/DiscountIdFilterComponent"
-          },
-          "tiers": {
-            "$ref": "#/components/schemas/DiscountIdFilterComponent"
-          },
-          "tags": {
-            "$ref": "#/components/schemas/DiscountIdFilterComponent"
-          },
-          "inventoryTags": {
-            "$ref": "#/components/schemas/DiscountIdFilterComponent"
-          },
-          "customerTypes": {
-            "$ref": "#/components/schemas/DiscountIdFilterComponent"
-          },
-          "discountGroups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DiscountDiscountGroupComponent"
-            }
-          },
+          "appliesToLocations": {},
+          "weeklyRecurrenceInfo": {},
+          "products": {},
+          "productCategories": {},
+          "brands": {},
+          "vendors": {},
+          "strains": {},
+          "tiers": {},
+          "tags": {},
+          "inventoryTags": {},
+          "customerTypes": {},
+          "discountGroups": {},
           "createdAt": {
             "type": "string",
             "format": "date-time"
@@ -15651,48 +16097,18 @@
                 "stackOnOtherDiscounts": {
                   "type": "boolean"
                 },
-                "appliesToLocations": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/DiscountAppliesToLocationComponent"
-                  }
-                },
-                "weeklyRecurrenceInfo": {
-                  "$ref": "#/components/schemas/DiscountWeeklyRecurrenceComponent"
-                },
-                "products": {
-                  "$ref": "#/components/schemas/DiscountIdFilterComponent"
-                },
-                "productCategories": {
-                  "$ref": "#/components/schemas/DiscountIdFilterComponent"
-                },
-                "brands": {
-                  "$ref": "#/components/schemas/DiscountIdFilterComponent"
-                },
-                "vendors": {
-                  "$ref": "#/components/schemas/DiscountIdFilterComponent"
-                },
-                "strains": {
-                  "$ref": "#/components/schemas/DiscountIdFilterComponent"
-                },
-                "tiers": {
-                  "$ref": "#/components/schemas/DiscountIdFilterComponent"
-                },
-                "tags": {
-                  "$ref": "#/components/schemas/DiscountIdFilterComponent"
-                },
-                "inventoryTags": {
-                  "$ref": "#/components/schemas/DiscountIdFilterComponent"
-                },
-                "customerTypes": {
-                  "$ref": "#/components/schemas/DiscountIdFilterComponent"
-                },
-                "discountGroups": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/DiscountDiscountGroupComponent"
-                  }
-                },
+                "appliesToLocations": {},
+                "weeklyRecurrenceInfo": {},
+                "products": {},
+                "productCategories": {},
+                "brands": {},
+                "vendors": {},
+                "strains": {},
+                "tiers": {},
+                "tags": {},
+                "inventoryTags": {},
+                "customerTypes": {},
+                "discountGroups": {},
                 "createdAt": {
                   "type": "string",
                   "format": "date-time"
@@ -15757,81 +16173,6 @@
           },
           "meta": {
             "type": "object"
-          }
-        }
-      },
-      "DiscountAppliesToLocationComponent": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "locationName": {
-            "type": "string"
-          },
-          "dutchieStoreID": {
-            "type": "string"
-          }
-        }
-      },
-      "DiscountWeeklyRecurrenceComponent": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "startTime": {
-            "type": "string"
-          },
-          "endTime": {
-            "type": "string"
-          },
-          "appliesOnMonday": {
-            "type": "boolean"
-          },
-          "appliesOnTuesday": {
-            "type": "boolean"
-          },
-          "appliesOnWednesday": {
-            "type": "boolean"
-          },
-          "appliesOnThursday": {
-            "type": "boolean"
-          },
-          "appliesOnFriday": {
-            "type": "boolean"
-          },
-          "appliesOnSaturday": {
-            "type": "boolean"
-          },
-          "appliesOnSunday": {
-            "type": "boolean"
-          }
-        }
-      },
-      "DiscountIdFilterComponent": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "ids": {},
-          "isExclusion": {
-            "type": "boolean"
-          }
-        }
-      },
-      "DiscountDiscountGroupComponent": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "discountGroupId": {
-            "type": "string"
-          },
-          "discountGroupName": {
-            "type": "string"
           }
         }
       },
@@ -33159,6 +33500,552 @@
           },
           "antecedentBatchName": {
             "type": "string"
+          }
+        }
+      },
+      "ProductDiscountRequest": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "dutchie_store_id": {
+                "type": "string"
+              },
+              "product_id": {
+                "type": "string"
+              },
+              "product_name": {
+                "type": "string"
+              },
+              "brand_name": {
+                "type": "string"
+              },
+              "category": {
+                "type": "string"
+              },
+              "image_url": {
+                "type": "string"
+              },
+              "unit_price": {
+                "type": "number",
+                "format": "float"
+              },
+              "discount_id": {
+                "type": "string"
+              },
+              "discount_name": {
+                "type": "string"
+              },
+              "discount_amount": {
+                "type": "number",
+                "format": "float"
+              },
+              "discount_type": {
+                "type": "string"
+              },
+              "locale": {
+                "type": "string"
+              },
+              "localizations": {
+                "type": "array",
+                "items": {
+                  "oneOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ],
+                  "example": "string or id"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ProductDiscountListResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductDiscount"
+            }
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "pagination": {
+                "type": "object",
+                "properties": {
+                  "page": {
+                    "type": "integer"
+                  },
+                  "pageSize": {
+                    "type": "integer",
+                    "minimum": 25
+                  },
+                  "pageCount": {
+                    "type": "integer",
+                    "maximum": 1
+                  },
+                  "total": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "ProductDiscount": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "documentId": {
+            "type": "string"
+          },
+          "dutchie_store_id": {
+            "type": "string"
+          },
+          "product_id": {
+            "type": "string"
+          },
+          "product_name": {
+            "type": "string"
+          },
+          "brand_name": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "image_url": {
+            "type": "string"
+          },
+          "unit_price": {
+            "type": "number",
+            "format": "float"
+          },
+          "discount_id": {
+            "type": "string"
+          },
+          "discount_name": {
+            "type": "string"
+          },
+          "discount_amount": {
+            "type": "number",
+            "format": "float"
+          },
+          "discount_type": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "publishedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "documentId": {
+                "type": "string"
+              },
+              "firstname": {
+                "type": "string"
+              },
+              "lastname": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string",
+                "format": "email"
+              },
+              "resetPasswordToken": {
+                "type": "string"
+              },
+              "registrationToken": {
+                "type": "string"
+              },
+              "isActive": {
+                "type": "boolean"
+              },
+              "roles": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "documentId": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "users": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "documentId": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "permissions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "documentId": {
+                            "type": "string"
+                          },
+                          "action": {
+                            "type": "string"
+                          },
+                          "actionParameters": {},
+                          "subject": {
+                            "type": "string"
+                          },
+                          "properties": {},
+                          "conditions": {},
+                          "role": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "documentId": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "publishedAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "createdBy": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "documentId": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "updatedBy": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "documentId": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "locale": {
+                            "type": "string"
+                          },
+                          "localizations": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "number"
+                                },
+                                "documentId": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "publishedAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "createdBy": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "documentId": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "updatedBy": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "documentId": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "locale": {
+                      "type": "string"
+                    },
+                    "localizations": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "documentId": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "blocked": {
+                "type": "boolean"
+              },
+              "preferedLanguage": {
+                "type": "string"
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "publishedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "createdBy": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "documentId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "updatedBy": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "documentId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "locale": {
+                "type": "string"
+              },
+              "localizations": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "documentId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "updatedBy": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "documentId": {
+                "type": "string"
+              }
+            }
+          },
+          "locale": {
+            "type": "string"
+          },
+          "localizations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number"
+                },
+                "documentId": {
+                  "type": "string"
+                },
+                "dutchie_store_id": {
+                  "type": "string"
+                },
+                "product_id": {
+                  "type": "string"
+                },
+                "product_name": {
+                  "type": "string"
+                },
+                "brand_name": {
+                  "type": "string"
+                },
+                "category": {
+                  "type": "string"
+                },
+                "image_url": {
+                  "type": "string"
+                },
+                "unit_price": {
+                  "type": "number",
+                  "format": "float"
+                },
+                "discount_id": {
+                  "type": "string"
+                },
+                "discount_name": {
+                  "type": "string"
+                },
+                "discount_amount": {
+                  "type": "number",
+                  "format": "float"
+                },
+                "discount_type": {
+                  "type": "string"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "publishedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "createdBy": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "documentId": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "updatedBy": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "documentId": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "locale": {
+                  "type": "string"
+                },
+                "localizations": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "documentId": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "ProductDiscountResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/ProductDiscount"
+          },
+          "meta": {
+            "type": "object"
           }
         }
       },

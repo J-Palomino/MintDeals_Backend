@@ -616,18 +616,15 @@ export interface ApiDiscountDiscount extends Struct.CollectionTypeSchema {
   };
   attributes: {
     applicationMethod: Schema.Attribute.String;
-    appliesToLocations: Schema.Attribute.Component<
-      'discount.applies-to-location',
-      true
-    >;
-    brands: Schema.Attribute.Component<'discount.id-filter', false>;
+    appliesToLocations: Schema.Attribute.JSON;
+    brands: Schema.Attribute.JSON;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    customerTypes: Schema.Attribute.Component<'discount.id-filter', false>;
+    customerTypes: Schema.Attribute.JSON;
     discountAmount: Schema.Attribute.Decimal;
     discountCode: Schema.Attribute.String;
-    discountGroups: Schema.Attribute.Component<'discount.discount-group', true>;
+    discountGroups: Schema.Attribute.JSON;
     discountId: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
@@ -639,7 +636,7 @@ export interface ApiDiscountDiscount extends Struct.CollectionTypeSchema {
       Schema.Attribute.DefaultTo<false>;
     includeNonCannabis: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<false>;
-    inventoryTags: Schema.Attribute.Component<'discount.id-filter', false>;
+    inventoryTags: Schema.Attribute.JSON;
     isActive: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     isAvailableOnline: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<false>;
@@ -653,27 +650,24 @@ export interface ApiDiscountDiscount extends Struct.CollectionTypeSchema {
     maximumItemsAllowed: Schema.Attribute.Integer;
     maximumUsageCount: Schema.Attribute.Integer;
     minimumItemsRequired: Schema.Attribute.Integer;
-    productCategories: Schema.Attribute.Component<'discount.id-filter', false>;
-    products: Schema.Attribute.Component<'discount.id-filter', false>;
+    productCategories: Schema.Attribute.JSON;
+    products: Schema.Attribute.JSON;
     publishedAt: Schema.Attribute.DateTime;
     requireManagerApproval: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<false>;
     stackOnOtherDiscounts: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<false>;
-    strains: Schema.Attribute.Component<'discount.id-filter', false>;
-    tags: Schema.Attribute.Component<'discount.id-filter', false>;
+    strains: Schema.Attribute.JSON;
+    tags: Schema.Attribute.JSON;
     thresholdType: Schema.Attribute.String;
-    tiers: Schema.Attribute.Component<'discount.id-filter', false>;
+    tiers: Schema.Attribute.JSON;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     validFrom: Schema.Attribute.DateTime;
     validUntil: Schema.Attribute.DateTime;
-    vendors: Schema.Attribute.Component<'discount.id-filter', false>;
-    weeklyRecurrenceInfo: Schema.Attribute.Component<
-      'discount.weekly-recurrence',
-      false
-    >;
+    vendors: Schema.Attribute.JSON;
+    weeklyRecurrenceInfo: Schema.Attribute.JSON;
   };
 }
 
@@ -1379,6 +1373,46 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 200;
       }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiProductDiscountProductDiscount
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'product_discounts';
+  info: {
+    description: 'Product-level discount data from Dutchie';
+    displayName: 'Product Discount';
+    pluralName: 'product-discounts';
+    singularName: 'product-discount';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    brand_name: Schema.Attribute.String;
+    category: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    discount_amount: Schema.Attribute.Decimal;
+    discount_id: Schema.Attribute.String;
+    discount_name: Schema.Attribute.String;
+    discount_type: Schema.Attribute.String;
+    dutchie_store_id: Schema.Attribute.String;
+    image_url: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::product-discount.product-discount'
+    > &
+      Schema.Attribute.Private;
+    product_id: Schema.Attribute.String;
+    product_name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    unit_price: Schema.Attribute.Decimal;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -2418,6 +2452,7 @@ declare module '@strapi/strapi' {
       'api::home-page.home-page': ApiHomePageHomePage;
       'api::inventory.inventory': ApiInventoryInventory;
       'api::page.page': ApiPagePage;
+      'api::product-discount.product-discount': ApiProductDiscountProductDiscount;
       'api::promotion.promotion': ApiPromotionPromotion;
       'api::region.region': ApiRegionRegion;
       'api::reigion-type.reigion-type': ApiReigionTypeReigionType;
