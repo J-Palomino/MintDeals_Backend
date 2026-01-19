@@ -234,9 +234,9 @@
     },
     "events": {
       "type": "relation",
-      "relation": "manyToMany",
+      "relation": "oneToMany",
       "target": "api::event.event",
-      "mappedBy": "stores"
+      "mappedBy": "store"
     },
     "announcements": {
       "type": "relation",

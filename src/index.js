@@ -46,6 +46,8 @@ async function setPublicPermissions(strapi) {
     { api: 'discount', actions: ['find', 'findOne'] },
     // Product Discount API
     { api: 'product-discount', actions: ['find', 'findOne', 'getProductDiscounts'] },
+    // Event API
+    { api: 'event', actions: ['find', 'findOne'] },
   ];
 
   try {

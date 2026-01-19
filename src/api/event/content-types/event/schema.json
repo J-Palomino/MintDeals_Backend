@@ -5,81 +5,74 @@
     "singularName": "event",
     "pluralName": "events",
     "displayName": "Event",
-    "description": "Store events and special occasions"
+    "description": "Store events, vendor days, and special occasions"
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
+    "title": {
       "type": "string",
       "maxLength": 200,
       "required": true
     },
     "slug": {
       "type": "uid",
-      "targetField": "name",
+      "targetField": "title",
       "required": true
     },
     "description": {
-      "type": "text"
+      "type": "richtext"
+    },
+    "short_description": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "event_date": {
+      "type": "date",
+      "required": true
+    },
+    "start_time": {
+      "type": "time",
+      "required": true
+    },
+    "end_time": {
+      "type": "time"
+    },
+    "location_details": {
+      "type": "string",
+      "maxLength": 255
     },
     "event_type": {
       "type": "enumeration",
       "enum": [
-        "grand_opening",
-        "product_launch",
-        "educational",
+        "vendor_day",
+        "special_sale",
+        "workshop",
         "community",
-        "sale",
+        "holiday",
         "other"
       ],
-      "default": "other"
-    },
-    "start_datetime": {
-      "type": "datetime",
+      "default": "other",
       "required": true
     },
-    "end_datetime": {
-      "type": "datetime"
-    },
-    "is_all_day": {
+    "is_featured": {
       "type": "boolean",
       "default": false
     },
-    "is_recurring": {
-      "type": "boolean",
-      "default": false
-    },
-    "recurrence_pattern": {
-      "type": "string",
-      "maxLength": 100
-    },
-    "max_attendees": {
-      "type": "integer"
-    },
-    "registration_required": {
-      "type": "boolean",
-      "default": false
-    },
-    "registration_url": {
-      "type": "string"
-    },
-    "featured_image": {
+    "image": {
       "type": "media",
       "multiple": false,
       "allowedTypes": [
         "images"
       ]
     },
-    "gallery": {
-      "type": "media",
-      "multiple": true,
-      "allowedTypes": [
-        "images",
-        "videos"
-      ]
+    "store": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::store.store",
+      "inversedBy": "events"
     },
     "brand": {
       "type": "relation",
@@ -87,22 +80,10 @@
       "target": "api::brand.brand",
       "inversedBy": "events"
     },
-    "stores": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::store.store",
-      "inversedBy": "events"
-    },
     "seo": {
       "type": "component",
       "component": "seo.meta",
       "repeatable": false
-    },
-    "region": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::region.region",
-      "inversedBy": "events"
     }
   }
 }
