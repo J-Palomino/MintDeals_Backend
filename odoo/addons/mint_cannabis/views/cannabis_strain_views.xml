@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- Cannabis Strain Tree View -->
-    <record id="cannabis_strain_view_tree" model="ir.ui.view">
-        <field name="name">cannabis.strain.tree</field>
+    <!-- Cannabis Strain List View -->
+    <record id="cannabis_strain_view_list" model="ir.ui.view">
+        <field name="name">cannabis.strain.list</field>
         <field name="model">cannabis.strain</field>
         <field name="arch" type="xml">
-            <tree string="Cannabis Strains">
+            <list string="Cannabis Strains">
                 <field name="name"/>
                 <field name="strain_type"/>
                 <field name="dominant_terpene"/>
@@ -14,7 +14,7 @@
                 <field name="typical_thc_max"/>
                 <field name="product_count"/>
                 <field name="active" invisible="1"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -113,7 +113,7 @@
     <record id="cannabis_strain_action" model="ir.actions.act_window">
         <field name="name">Strains</field>
         <field name="res_model">cannabis.strain</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="search_view_id" ref="cannabis_strain_view_search"/>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
