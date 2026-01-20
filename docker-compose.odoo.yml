@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  odoo:
+    build:
+      context: ./odoo
+      dockerfile: Dockerfile
+    container_name: mint-odoo
+    ports:
+      - "8069:8069"
+    environment:
+      - PGHOST=odoo-db
+      - PGPORT=5432
+      - PGUSER=odoo
+      - PGPASSWORD=odoo
+      - PGDATABASE=odoo
+      - ODOO_ADMIN_PASSWORD=admin
+      - ODOO_LIST_DB=True
+      - PORT=8069
+    volumes:
+      - odoo-data:/var/lib/odoo
+      - ./odoo/addons:/mnt/extra-addons:ro
+    depends_on:
+      odoo-db:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - mint-network
+
+  odoo-db:
+    image: postgres:15-alpine
+    container_name: mint-odoo-db
+    environment:
+      - POSTGRES_DB=odoo
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - odoo-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U odoo -d odoo"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - mint-network
+
+volumes:
+  odoo-data:
+    driver: local
+  odoo-postgres-data:
+    driver: local
+
+networks:
+  mint-network:
+    driver: bridge

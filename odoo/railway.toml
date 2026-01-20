@@ -1,0 +1,10 @@
+[build]
+builder = "dockerfile"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+healthcheckPath = "/web/health"
+healthcheckTimeout = 300
+startCommand = "/custom-entrypoint.sh odoo"
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 3

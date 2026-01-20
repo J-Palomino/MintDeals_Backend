@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Weight/Size Attribute -->
+        <record id="product_attribute_weight" model="product.attribute">
+            <field name="name">Weight</field>
+            <field name="display_type">radio</field>
+            <field name="create_variant">always</field>
+        </record>
+
+        <record id="product_attribute_value_1g" model="product.attribute.value">
+            <field name="name">1g</field>
+            <field name="attribute_id" ref="product_attribute_weight"/>
+            <field name="sequence">10</field>
+        </record>
+
+        <record id="product_attribute_value_3_5g" model="product.attribute.value">
+            <field name="name">3.5g (1/8 oz)</field>
+            <field name="attribute_id" ref="product_attribute_weight"/>
+            <field name="sequence">20</field>
+        </record>
+
+        <record id="product_attribute_value_7g" model="product.attribute.value">
+            <field name="name">7g (1/4 oz)</field>
+            <field name="attribute_id" ref="product_attribute_weight"/>
+            <field name="sequence">30</field>
+        </record>
+
+        <record id="product_attribute_value_14g" model="product.attribute.value">
+            <field name="name">14g (1/2 oz)</field>
+            <field name="attribute_id" ref="product_attribute_weight"/>
+            <field name="sequence">40</field>
+        </record>
+
+        <record id="product_attribute_value_28g" model="product.attribute.value">
+            <field name="name">28g (1 oz)</field>
+            <field name="attribute_id" ref="product_attribute_weight"/>
+            <field name="sequence">50</field>
+        </record>
+
+        <!-- Cartridge Size Attribute -->
+        <record id="product_attribute_cart_size" model="product.attribute">
+            <field name="name">Cartridge Size</field>
+            <field name="display_type">radio</field>
+            <field name="create_variant">always</field>
+        </record>
+
+        <record id="product_attribute_value_300mg" model="product.attribute.value">
+            <field name="name">300mg</field>
+            <field name="attribute_id" ref="product_attribute_cart_size"/>
+            <field name="sequence">10</field>
+        </record>
+
+        <record id="product_attribute_value_500mg" model="product.attribute.value">
+            <field name="name">500mg (0.5g)</field>
+            <field name="attribute_id" ref="product_attribute_cart_size"/>
+            <field name="sequence">20</field>
+        </record>
+
+        <record id="product_attribute_value_1000mg" model="product.attribute.value">
+            <field name="name">1000mg (1g)</field>
+            <field name="attribute_id" ref="product_attribute_cart_size"/>
+            <field name="sequence">30</field>
+        </record>
+
+        <record id="product_attribute_value_2000mg" model="product.attribute.value">
+            <field name="name">2000mg (2g)</field>
+            <field name="attribute_id" ref="product_attribute_cart_size"/>
+            <field name="sequence">40</field>
+        </record>
+
+        <!-- Edible Dosage Attribute -->
+        <record id="product_attribute_edible_dosage" model="product.attribute">
+            <field name="name">Total THC (mg)</field>
+            <field name="display_type">radio</field>
+            <field name="create_variant">always</field>
+        </record>
+
+        <record id="product_attribute_value_50mg" model="product.attribute.value">
+            <field name="name">50mg</field>
+            <field name="attribute_id" ref="product_attribute_edible_dosage"/>
+            <field name="sequence">10</field>
+        </record>
+
+        <record id="product_attribute_value_100mg" model="product.attribute.value">
+            <field name="name">100mg</field>
+            <field name="attribute_id" ref="product_attribute_edible_dosage"/>
+            <field name="sequence">20</field>
+        </record>
+
+        <record id="product_attribute_value_200mg" model="product.attribute.value">
+            <field name="name">200mg</field>
+            <field name="attribute_id" ref="product_attribute_edible_dosage"/>
+            <field name="sequence">30</field>
+        </record>
+
+        <record id="product_attribute_value_400mg" model="product.attribute.value">
+            <field name="name">400mg</field>
+            <field name="attribute_id" ref="product_attribute_edible_dosage"/>
+            <field name="sequence">40</field>
+        </record>
+
+        <!-- Strain Type Attribute -->
+        <record id="product_attribute_strain_type" model="product.attribute">
+            <field name="name">Strain Type</field>
+            <field name="display_type">pills</field>
+            <field name="create_variant">no_variant</field>
+        </record>
+
+        <record id="product_attribute_value_indica" model="product.attribute.value">
+            <field name="name">Indica</field>
+            <field name="attribute_id" ref="product_attribute_strain_type"/>
+            <field name="sequence">10</field>
+        </record>
+
+        <record id="product_attribute_value_sativa" model="product.attribute.value">
+            <field name="name">Sativa</field>
+            <field name="attribute_id" ref="product_attribute_strain_type"/>
+            <field name="sequence">20</field>
+        </record>
+
+        <record id="product_attribute_value_hybrid" model="product.attribute.value">
+            <field name="name">Hybrid</field>
+            <field name="attribute_id" ref="product_attribute_strain_type"/>
+            <field name="sequence">30</field>
+        </record>
+
+        <record id="product_attribute_value_cbd" model="product.attribute.value">
+            <field name="name">CBD</field>
+            <field name="attribute_id" ref="product_attribute_strain_type"/>
+            <field name="sequence">40</field>
+        </record>
+
+        <!-- Pre-roll Count Attribute -->
+        <record id="product_attribute_preroll_count" model="product.attribute">
+            <field name="name">Pre-Roll Count</field>
+            <field name="display_type">radio</field>
+            <field name="create_variant">always</field>
+        </record>
+
+        <record id="product_attribute_value_1pack" model="product.attribute.value">
+            <field name="name">Single</field>
+            <field name="attribute_id" ref="product_attribute_preroll_count"/>
+            <field name="sequence">10</field>
+        </record>
+
+        <record id="product_attribute_value_2pack" model="product.attribute.value">
+            <field name="name">2-Pack</field>
+            <field name="attribute_id" ref="product_attribute_preroll_count"/>
+            <field name="sequence">20</field>
+        </record>
+
+        <record id="product_attribute_value_5pack" model="product.attribute.value">
+            <field name="name">5-Pack</field>
+            <field name="attribute_id" ref="product_attribute_preroll_count"/>
+            <field name="sequence">30</field>
+        </record>
+
+        <record id="product_attribute_value_10pack" model="product.attribute.value">
+            <field name="name">10-Pack</field>
+            <field name="attribute_id" ref="product_attribute_preroll_count"/>
+            <field name="sequence">40</field>
+        </record>
+
+    </data>
+</odoo>

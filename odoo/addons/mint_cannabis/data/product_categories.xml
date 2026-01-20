@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Root Cannabis Category -->
+        <record id="product_category_cannabis" model="product.category">
+            <field name="name">Cannabis</field>
+            <field name="parent_id" ref="product.product_category_all"/>
+        </record>
+
+        <!-- Flower Category -->
+        <record id="product_category_flower" model="product.category">
+            <field name="name">Flower</field>
+            <field name="parent_id" ref="product_category_cannabis"/>
+        </record>
+
+        <record id="product_category_flower_preroll" model="product.category">
+            <field name="name">Pre-Rolls</field>
+            <field name="parent_id" ref="product_category_flower"/>
+        </record>
+
+        <record id="product_category_flower_shake" model="product.category">
+            <field name="name">Shake</field>
+            <field name="parent_id" ref="product_category_flower"/>
+        </record>
+
+        <record id="product_category_flower_smalls" model="product.category">
+            <field name="name">Smalls</field>
+            <field name="parent_id" ref="product_category_flower"/>
+        </record>
+
+        <!-- Concentrates Category -->
+        <record id="product_category_concentrates" model="product.category">
+            <field name="name">Concentrates</field>
+            <field name="parent_id" ref="product_category_cannabis"/>
+        </record>
+
+        <record id="product_category_concentrates_shatter" model="product.category">
+            <field name="name">Shatter</field>
+            <field name="parent_id" ref="product_category_concentrates"/>
+        </record>
+
+        <record id="product_category_concentrates_wax" model="product.category">
+            <field name="name">Wax</field>
+            <field name="parent_id" ref="product_category_concentrates"/>
+        </record>
+
+        <record id="product_category_concentrates_budder" model="product.category">
+            <field name="name">Budder</field>
+            <field name="parent_id" ref="product_category_concentrates"/>
+        </record>
+
+        <record id="product_category_concentrates_live_resin" model="product.category">
+            <field name="name">Live Resin</field>
+            <field name="parent_id" ref="product_category_concentrates"/>
+        </record>
+
+        <record id="product_category_concentrates_rosin" model="product.category">
+            <field name="name">Rosin</field>
+            <field name="parent_id" ref="product_category_concentrates"/>
+        </record>
+
+        <record id="product_category_concentrates_rso" model="product.category">
+            <field name="name">RSO</field>
+            <field name="parent_id" ref="product_category_concentrates"/>
+        </record>
+
+        <record id="product_category_concentrates_distillate" model="product.category">
+            <field name="name">Distillate</field>
+            <field name="parent_id" ref="product_category_concentrates"/>
+        </record>
+
+        <!-- Vapes Category -->
+        <record id="product_category_vapes" model="product.category">
+            <field name="name">Vapes</field>
+            <field name="parent_id" ref="product_category_cannabis"/>
+        </record>
+
+        <record id="product_category_vapes_cartridges" model="product.category">
+            <field name="name">Cartridges</field>
+            <field name="parent_id" ref="product_category_vapes"/>
+        </record>
+
+        <record id="product_category_vapes_disposables" model="product.category">
+            <field name="name">Disposables</field>
+            <field name="parent_id" ref="product_category_vapes"/>
+        </record>
+
+        <record id="product_category_vapes_pods" model="product.category">
+            <field name="name">Pods</field>
+            <field name="parent_id" ref="product_category_vapes"/>
+        </record>
+
+        <!-- Edibles Category -->
+        <record id="product_category_edibles" model="product.category">
+            <field name="name">Edibles</field>
+            <field name="parent_id" ref="product_category_cannabis"/>
+        </record>
+
+        <record id="product_category_edibles_gummies" model="product.category">
+            <field name="name">Gummies</field>
+            <field name="parent_id" ref="product_category_edibles"/>
+        </record>
+
+        <record id="product_category_edibles_chocolates" model="product.category">
+            <field name="name">Chocolates</field>
+            <field name="parent_id" ref="product_category_edibles"/>
+        </record>
+
+        <record id="product_category_edibles_baked" model="product.category">
+            <field name="name">Baked Goods</field>
+            <field name="parent_id" ref="product_category_edibles"/>
+        </record>
+
+        <record id="product_category_edibles_beverages" model="product.category">
+            <field name="name">Beverages</field>
+            <field name="parent_id" ref="product_category_edibles"/>
+        </record>
+
+        <record id="product_category_edibles_mints" model="product.category">
+            <field name="name">Mints &amp; Hard Candy</field>
+            <field name="parent_id" ref="product_category_edibles"/>
+        </record>
+
+        <record id="product_category_edibles_capsules" model="product.category">
+            <field name="name">Capsules</field>
+            <field name="parent_id" ref="product_category_edibles"/>
+        </record>
+
+        <!-- Tinctures Category -->
+        <record id="product_category_tinctures" model="product.category">
+            <field name="name">Tinctures</field>
+            <field name="parent_id" ref="product_category_cannabis"/>
+        </record>
+
+        <!-- Topicals Category -->
+        <record id="product_category_topicals" model="product.category">
+            <field name="name">Topicals</field>
+            <field name="parent_id" ref="product_category_cannabis"/>
+        </record>
+
+        <record id="product_category_topicals_lotions" model="product.category">
+            <field name="name">Lotions &amp; Creams</field>
+            <field name="parent_id" ref="product_category_topicals"/>
+        </record>
+
+        <record id="product_category_topicals_balms" model="product.category">
+            <field name="name">Balms &amp; Salves</field>
+            <field name="parent_id" ref="product_category_topicals"/>
+        </record>
+
+        <record id="product_category_topicals_patches" model="product.category">
+            <field name="name">Transdermal Patches</field>
+            <field name="parent_id" ref="product_category_topicals"/>
+        </record>
+
+        <!-- Accessories Category -->
+        <record id="product_category_accessories" model="product.category">
+            <field name="name">Accessories</field>
+            <field name="parent_id" ref="product_category_cannabis"/>
+        </record>
+
+        <record id="product_category_accessories_batteries" model="product.category">
+            <field name="name">Batteries</field>
+            <field name="parent_id" ref="product_category_accessories"/>
+        </record>
+
+        <record id="product_category_accessories_papers" model="product.category">
+            <field name="name">Papers &amp; Wraps</field>
+            <field name="parent_id" ref="product_category_accessories"/>
+        </record>
+
+        <record id="product_category_accessories_pipes" model="product.category">
+            <field name="name">Pipes &amp; Bongs</field>
+            <field name="parent_id" ref="product_category_accessories"/>
+        </record>
+
+        <record id="product_category_accessories_storage" model="product.category">
+            <field name="name">Storage</field>
+            <field name="parent_id" ref="product_category_accessories"/>
+        </record>
+
+    </data>
+</odoo>

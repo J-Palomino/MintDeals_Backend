@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Cannabis Brand Tree View -->
+    <record id="cannabis_brand_view_tree" model="ir.ui.view">
+        <field name="name">cannabis.brand.tree</field>
+        <field name="model">cannabis.brand</field>
+        <field name="arch" type="xml">
+            <tree string="Cannabis Brands">
+                <field name="name"/>
+                <field name="brand_type"/>
+                <field name="specialty"/>
+                <field name="license_number"/>
+                <field name="product_count"/>
+                <field name="featured" widget="boolean_toggle"/>
+                <field name="active" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Cannabis Brand Kanban View -->
+    <record id="cannabis_brand_view_kanban" model="ir.ui.view">
+        <field name="name">cannabis.brand.kanban</field>
+        <field name="model">cannabis.brand</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="id"/>
+                <field name="name"/>
+                <field name="brand_type"/>
+                <field name="specialty"/>
+                <field name="product_count"/>
+                <field name="logo"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_kanban_image">
+                                <img t-if="record.logo.raw_value"
+                                     t-att-src="kanban_image('cannabis.brand', 'logo', record.id.raw_value)"
+                                     alt="Brand Logo"/>
+                                <span t-else="" class="fa fa-tags fa-3x text-muted"/>
+                            </div>
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <field name="name"/>
+                                </strong>
+                                <div class="o_kanban_tags_section">
+                                    <span class="badge rounded-pill">
+                                        <field name="brand_type"/>
+                                    </span>
+                                    <span t-if="record.specialty.raw_value" class="badge rounded-pill bg-info">
+                                        <field name="specialty"/>
+                                    </span>
+                                </div>
+                                <div class="text-muted">
+                                    <field name="product_count"/> products
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Cannabis Brand Form View -->
+    <record id="cannabis_brand_view_form" model="ir.ui.view">
+        <field name="name">cannabis.brand.form</field>
+        <field name="model">cannabis.brand</field>
+        <field name="arch" type="xml">
+            <form string="Cannabis Brand">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="%(product.product_template_action)d" type="action"
+                                class="oe_stat_button" icon="fa-cubes"
+                                context="{'search_default_x_brand_id': active_id}">
+                            <field name="product_count" string="Products" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <field name="logo" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Brand Name"/>
+                        </h1>
+                        <field name="display_name" placeholder="Display Name (if different)"/>
+                    </div>
+                    <group>
+                        <group string="Brand Information">
+                            <field name="code"/>
+                            <field name="brand_type"/>
+                            <field name="specialty"/>
+                            <field name="featured"/>
+                        </group>
+                        <group string="Dutchie Integration">
+                            <field name="x_dutchie_brand_id"/>
+                            <field name="partner_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Contact" name="contact">
+                            <group>
+                                <group string="Online">
+                                    <field name="website" widget="url"/>
+                                    <field name="email"/>
+                                    <field name="phone"/>
+                                </group>
+                                <group string="Address">
+                                    <field name="street"/>
+                                    <field name="street2"/>
+                                    <field name="city"/>
+                                    <field name="state_id"/>
+                                    <field name="zip"/>
+                                    <field name="country_id"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Licensing" name="licensing">
+                            <group>
+                                <field name="license_number"/>
+                                <field name="license_type"/>
+                                <field name="license_expiry"/>
+                            </group>
+                        </page>
+                        <page string="Categories" name="categories">
+                            <field name="category_ids" widget="many2many_tags"/>
+                        </page>
+                        <page string="Description" name="description">
+                            <field name="description" placeholder="Brand description..."/>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="notes"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Cannabis Brand Search View -->
+    <record id="cannabis_brand_view_search" model="ir.ui.view">
+        <field name="name">cannabis.brand.search</field>
+        <field name="model">cannabis.brand</field>
+        <field name="arch" type="xml">
+            <search string="Search Brands">
+                <field name="name"/>
+                <field name="license_number"/>
+                <filter string="Featured" name="featured" domain="[('featured', '=', True)]"/>
+                <filter string="Cultivators" name="cultivator" domain="[('brand_type', '=', 'cultivator')]"/>
+                <filter string="Processors" name="processor" domain="[('brand_type', '=', 'processor')]"/>
+                <filter string="Manufacturers" name="manufacturer" domain="[('brand_type', '=', 'manufacturer')]"/>
+                <separator/>
+                <filter string="Archived" name="archived" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Brand Type" name="group_type" context="{'group_by': 'brand_type'}"/>
+                    <filter string="Specialty" name="group_specialty" context="{'group_by': 'specialty'}"/>
+                    <filter string="State" name="group_state" context="{'group_by': 'state_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Cannabis Brand Action -->
+    <record id="cannabis_brand_action" model="ir.actions.act_window">
+        <field name="name">Brands</field>
+        <field name="res_model">cannabis.brand</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="search_view_id" ref="cannabis_brand_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first cannabis brand
+            </p>
+            <p>
+                Brands represent manufacturers, cultivators, and processors
+                of cannabis products.
+            </p>
+        </field>
+    </record>
+
+</odoo>

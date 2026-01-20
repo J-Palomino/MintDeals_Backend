@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cannabis_strain_user,cannabis.strain.user,model_cannabis_strain,stock.group_stock_user,1,0,0,0
+access_cannabis_strain_manager,cannabis.strain.manager,model_cannabis_strain,stock.group_stock_manager,1,1,1,1
+access_cannabis_brand_user,cannabis.brand.user,model_cannabis_brand,stock.group_stock_user,1,0,0,0
+access_cannabis_brand_manager,cannabis.brand.manager,model_cannabis_brand,stock.group_stock_manager,1,1,1,1
+access_cannabis_strain_pos,cannabis.strain.pos,model_cannabis_strain,point_of_sale.group_pos_user,1,0,0,0
+access_cannabis_brand_pos,cannabis.brand.pos,model_cannabis_brand,point_of_sale.group_pos_user,1,0,0,0
+access_cannabis_strain_sale,cannabis.strain.sale,model_cannabis_strain,sales_team.group_sale_salesman,1,0,0,0
+access_cannabis_brand_sale,cannabis.brand.sale,model_cannabis_brand,sales_team.group_sale_salesman,1,0,0,0

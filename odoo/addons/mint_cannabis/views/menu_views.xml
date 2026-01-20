@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Main Cannabis Menu (Top Level) -->
+    <menuitem id="menu_cannabis_root"
+              name="Cannabis"
+              sequence="5"
+              web_icon="mint_cannabis,static/description/icon.png"/>
+
+    <!-- Cannabis Configuration Menu -->
+    <menuitem id="menu_cannabis_config"
+              name="Configuration"
+              parent="menu_cannabis_root"
+              sequence="100"/>
+
+    <!-- Strains Menu -->
+    <menuitem id="menu_cannabis_strains"
+              name="Strains"
+              parent="menu_cannabis_config"
+              action="cannabis_strain_action"
+              sequence="10"/>
+
+    <!-- Brands Menu -->
+    <menuitem id="menu_cannabis_brands"
+              name="Brands"
+              parent="menu_cannabis_config"
+              action="cannabis_brand_action"
+              sequence="20"/>
+
+    <!-- Cannabis Products Menu (under Inventory) -->
+    <menuitem id="menu_cannabis_products"
+              name="Cannabis Products"
+              parent="stock.menu_stock_inventory_control"
+              action="product.product_template_action"
+              sequence="5"/>
+
+    <!-- Quick Links under Cannabis root -->
+    <menuitem id="menu_cannabis_products_direct"
+              name="Products"
+              parent="menu_cannabis_root"
+              action="product.product_template_action"
+              sequence="10"/>
+
+    <menuitem id="menu_cannabis_strains_direct"
+              name="Strains"
+              parent="menu_cannabis_root"
+              action="cannabis_strain_action"
+              sequence="20"/>
+
+    <menuitem id="menu_cannabis_brands_direct"
+              name="Brands"
+              parent="menu_cannabis_root"
+              action="cannabis_brand_action"
+              sequence="30"/>
+
+    <!-- Reporting Menu -->
+    <menuitem id="menu_cannabis_reports"
+              name="Reports"
+              parent="menu_cannabis_root"
+              sequence="90"/>
+
+</odoo>

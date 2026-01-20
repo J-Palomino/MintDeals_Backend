@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Cannabis Strain Tree View -->
+    <record id="cannabis_strain_view_tree" model="ir.ui.view">
+        <field name="name">cannabis.strain.tree</field>
+        <field name="model">cannabis.strain</field>
+        <field name="arch" type="xml">
+            <tree string="Cannabis Strains">
+                <field name="name"/>
+                <field name="strain_type"/>
+                <field name="dominant_terpene"/>
+                <field name="typical_thc_min"/>
+                <field name="typical_thc_max"/>
+                <field name="product_count"/>
+                <field name="active" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Cannabis Strain Form View -->
+    <record id="cannabis_strain_view_form" model="ir.ui.view">
+        <field name="name">cannabis.strain.form</field>
+        <field name="model">cannabis.strain</field>
+        <field name="arch" type="xml">
+            <form string="Cannabis Strain">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="%(product.product_template_action)d" type="action"
+                                class="oe_stat_button" icon="fa-cubes"
+                                context="{'search_default_x_strain_id': active_id}">
+                            <field name="product_count" string="Products" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <field name="image" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Strain Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Classification">
+                            <field name="strain_type"/>
+                            <field name="dominant_terpene"/>
+                            <field name="genetics"/>
+                            <field name="breeder"/>
+                        </group>
+                        <group string="Genetics">
+                            <field name="parent_strain_1_id"/>
+                            <field name="parent_strain_2_id"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Typical THC Range">
+                            <field name="typical_thc_min"/>
+                            <field name="typical_thc_max"/>
+                        </group>
+                        <group string="Typical CBD Range">
+                            <field name="typical_cbd_min"/>
+                            <field name="typical_cbd_max"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Effects &amp; Profile" name="effects">
+                            <group>
+                                <field name="effects" placeholder="Relaxed, Euphoric, Happy, Sleepy..."/>
+                                <field name="medical_uses" placeholder="Pain, Insomnia, Anxiety..."/>
+                            </group>
+                            <group>
+                                <field name="flavors" placeholder="Sweet, Citrus, Earthy..."/>
+                                <field name="aromas" placeholder="Pine, Berry, Diesel..."/>
+                            </group>
+                        </page>
+                        <page string="Description" name="description">
+                            <field name="description" placeholder="Detailed strain description..."/>
+                        </page>
+                        <page string="Terpene Profile" name="terpenes">
+                            <field name="terpene_profile" placeholder='{"myrcene": 0.5, "limonene": 0.3}'/>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="notes"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Cannabis Strain Search View -->
+    <record id="cannabis_strain_view_search" model="ir.ui.view">
+        <field name="name">cannabis.strain.search</field>
+        <field name="model">cannabis.strain</field>
+        <field name="arch" type="xml">
+            <search string="Search Strains">
+                <field name="name"/>
+                <field name="genetics"/>
+                <field name="breeder"/>
+                <filter string="Indica" name="indica" domain="[('strain_type', '=', 'indica')]"/>
+                <filter string="Sativa" name="sativa" domain="[('strain_type', '=', 'sativa')]"/>
+                <filter string="Hybrid" name="hybrid" domain="[('strain_type', 'in', ['hybrid', 'hybrid_indica', 'hybrid_sativa'])]"/>
+                <filter string="CBD" name="cbd" domain="[('strain_type', 'in', ['cbd', 'high_cbd'])]"/>
+                <separator/>
+                <filter string="Archived" name="archived" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Strain Type" name="group_strain_type" context="{'group_by': 'strain_type'}"/>
+                    <filter string="Dominant Terpene" name="group_terpene" context="{'group_by': 'dominant_terpene'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Cannabis Strain Action -->
+    <record id="cannabis_strain_action" model="ir.actions.act_window">
+        <field name="name">Strains</field>
+        <field name="res_model">cannabis.strain</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="cannabis_strain_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first cannabis strain
+            </p>
+            <p>
+                Strains help categorize cannabis products by their genetics,
+                effects, and terpene profiles.
+            </p>
+        </field>
+    </record>
+
+</odoo>
