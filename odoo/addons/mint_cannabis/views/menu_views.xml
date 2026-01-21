@@ -29,6 +29,12 @@
     <!-- Cannabis Products Menu (under Inventory) - removed, use Cannabis root menu instead -->
 
     <!-- Quick Links under Cannabis root -->
+    <menuitem id="menu_cannabis_inventory_direct"
+              name="Inventory by Store"
+              parent="menu_cannabis_root"
+              action="action_cannabis_inventory"
+              sequence="5"/>
+
     <menuitem id="menu_cannabis_products_direct"
               name="Products"
               parent="menu_cannabis_root"

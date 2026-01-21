@@ -168,4 +168,82 @@
         </field>
     </record>
 
+    <!-- Cannabis Inventory List View (Product Variants by Store) -->
+    <record id="product_product_list_view_cannabis_inventory" model="ir.ui.view">
+        <field name="name">product.product.list.cannabis.inventory</field>
+        <field name="model">product.product</field>
+        <field name="arch" type="xml">
+            <list string="Cannabis Inventory" default_order="x_quantity_available desc">
+                <field name="company_id" string="Company" optional="show"/>
+                <field name="default_code" string="SKU"/>
+                <field name="name" string="Product"/>
+                <field name="x_warehouse_id" string="Store"/>
+                <field name="x_store_name" string="Store Name" optional="hide"/>
+                <field name="x_quantity_available" string="Available" sum="Total Available"/>
+                <field name="x_quantity_on_floor" string="On Floor" optional="show"/>
+                <field name="list_price" string="Price"/>
+                <field name="x_special_price" string="Sale Price" optional="show"/>
+                <field name="x_thc_percentage" string="THC %" optional="show"/>
+                <field name="x_cbd_percentage" string="CBD %" optional="show"/>
+                <field name="x_batch_id" string="Batch" optional="hide"/>
+                <field name="x_dutchie_location_id" string="Dutchie ID" optional="hide"/>
+                <field name="x_synced_at" string="Last Sync" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Cannabis Inventory Search View -->
+    <record id="product_product_search_view_cannabis_inventory" model="ir.ui.view">
+        <field name="name">product.product.search.cannabis.inventory</field>
+        <field name="model">product.product</field>
+        <field name="arch" type="xml">
+            <search string="Search Cannabis Inventory">
+                <field name="name" string="Product"/>
+                <field name="default_code" string="SKU"/>
+                <field name="x_warehouse_id" string="Store"/>
+                <field name="company_id" string="Company"/>
+                <field name="x_batch_id" string="Batch"/>
+                <separator/>
+                <filter string="In Stock" name="in_stock" domain="[('x_quantity_available', '>', 0)]"/>
+                <filter string="Out of Stock" name="out_of_stock" domain="[('x_quantity_available', '=', 0)]"/>
+                <filter string="Low Stock" name="low_stock" domain="[('x_quantity_available', '>', 0), ('x_quantity_available', '&lt;', 5)]"/>
+                <separator/>
+                <filter string="On Sale" name="on_sale" domain="[('x_special_price', '>', 0)]"/>
+                <filter string="Staff Pick" name="staff_pick" domain="[('product_tmpl_id.x_staff_pick', '=', True)]"/>
+                <filter string="Medical Only" name="medical_only" domain="[('product_tmpl_id.x_medical_only', '=', True)]"/>
+                <separator/>
+                <filter string="High THC (&gt;20%)" name="high_thc" domain="[('x_thc_percentage', '>=', 20)]"/>
+                <filter string="High CBD (&gt;10%)" name="high_cbd" domain="[('x_cbd_percentage', '>=', 10)]"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter string="Company" name="group_company" context="{'group_by': 'company_id'}"/>
+                    <filter string="Store" name="group_store" context="{'group_by': 'x_warehouse_id'}"/>
+                    <filter string="Category" name="group_category" context="{'group_by': 'categ_id'}"/>
+                    <filter string="Brand" name="group_brand" context="{'group_by': 'product_tmpl_id.x_brand_id'}"/>
+                    <filter string="Strain Type" name="group_strain_type" context="{'group_by': 'product_tmpl_id.x_strain_type'}"/>
+                    <filter string="Batch" name="group_batch" context="{'group_by': 'x_batch_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Cannabis Inventory Action -->
+    <record id="action_cannabis_inventory" model="ir.actions.act_window">
+        <field name="name">Cannabis Inventory</field>
+        <field name="res_model">product.product</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="product_product_list_view_cannabis_inventory"/>
+        <field name="search_view_id" ref="product_product_search_view_cannabis_inventory"/>
+        <field name="domain">[('product_tmpl_id.x_is_cannabis', '=', True)]</field>
+        <field name="context">{'search_default_in_stock': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No cannabis inventory found
+            </p>
+            <p>
+                Run the Dutchie sync to import inventory data.
+            </p>
+        </field>
+    </record>
+
 </odoo>

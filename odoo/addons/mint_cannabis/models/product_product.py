@@ -35,6 +35,23 @@ class ProductProduct(models.Model):
         string='Dutchie POS Inventory ID',
         help='POS-specific inventory ID'
     )
+    x_warehouse_id = fields.Many2one(
+        'stock.warehouse',
+        string='Store/Warehouse',
+        index=True,
+        help='Warehouse/store this variant is located at'
+    )
+    x_store_name = fields.Char(
+        string='Store Name',
+        compute='_compute_store_name',
+        store=True,
+        help='Name of the store for display'
+    )
+
+    @api.depends('x_warehouse_id', 'x_warehouse_id.name')
+    def _compute_store_name(self):
+        for product in self:
+            product.x_store_name = product.x_warehouse_id.name if product.x_warehouse_id else ''
 
     # ===========================================
     # Potency Fields
