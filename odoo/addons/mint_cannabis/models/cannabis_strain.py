@@ -162,6 +162,18 @@ class CannabisStrain(models.Model):
         for strain in self:
             strain.product_count = len(strain.product_ids)
 
+    def action_view_products(self):
+        """Open products associated with this strain."""
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': f'Products - {self.name}',
+            'res_model': 'product.template',
+            'view_mode': 'list,form',
+            'domain': [('x_strain_id', '=', self.id)],
+            'context': {'default_x_strain_id': self.id},
+        }
+
     _sql_constraints = [
         ('name_uniq', 'unique(name)', 'Strain name must be unique!'),
     ]

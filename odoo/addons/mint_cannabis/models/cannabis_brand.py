@@ -165,6 +165,18 @@ class CannabisBrand(models.Model):
         for brand in self:
             brand.product_count = len(brand.product_ids)
 
+    def action_view_products(self):
+        """Open products associated with this brand."""
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': f'Products - {self.name}',
+            'res_model': 'product.template',
+            'view_mode': 'list,form',
+            'domain': [('x_brand_id', '=', self.id)],
+            'context': {'default_x_brand_id': self.id},
+        }
+
     @api.model
     def find_or_create_by_name(self, name, vals=None):
         """

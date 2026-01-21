@@ -4,8 +4,7 @@
     <!-- Main Cannabis Menu (Top Level) -->
     <menuitem id="menu_cannabis_root"
               name="Cannabis"
-              sequence="5"
-              web_icon="mint_cannabis,static/description/icon.png"/>
+              sequence="5"/>
 
     <!-- Cannabis Configuration Menu -->
     <menuitem id="menu_cannabis_config"
@@ -27,12 +26,7 @@
               action="cannabis_brand_action"
               sequence="20"/>
 
-    <!-- Cannabis Products Menu (under Inventory) -->
-    <menuitem id="menu_cannabis_products"
-              name="Cannabis Products"
-              parent="stock.menu_stock_inventory_control"
-              action="product.product_template_action"
-              sequence="5"/>
+    <!-- Cannabis Products Menu (under Inventory) - removed, use Cannabis root menu instead -->
 
     <!-- Quick Links under Cannabis root -->
     <menuitem id="menu_cannabis_products_direct"

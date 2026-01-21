@@ -70,9 +70,8 @@
             <form string="Cannabis Brand">
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button name="%(product.product_template_action)d" type="action"
-                                class="oe_stat_button" icon="fa-cubes"
-                                context="{'search_default_x_brand_id': active_id}">
+                        <button class="oe_stat_button" icon="fa-cubes"
+                                type="object" name="action_view_products">
                             <field name="product_count" string="Products" widget="statinfo"/>
                         </button>
                     </div>
